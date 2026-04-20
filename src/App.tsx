@@ -208,7 +208,7 @@ const UpsellModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
             <div className="p-6 text-center">
               <h2 className="text-xl font-black text-slate-900 mb-3">Espere! Antes de finalizar...</h2>
               <p className="text-gray-600 text-sm leading-relaxed mb-6">
-                Você escolheu o plano básico di <span className="font-bold text-slate-900">R$ 9,90</span>, mas por apenas <span className="font-bold text-sky-600">R$ 3 a mais</span> você pode liberar o <span className="font-bold text-slate-900">Pacote Premium</span>, com acesso total às 100 Dinâmicas de Filosofia e R$ 47 em bônus inclusos.
+                Você escolheu o plano básico di <span className="font-bold text-slate-900">R$ 9,90</span>, mas por apenas <span className="font-bold text-sky-600">R$ 5 a mais</span> você pode liberar o <span className="font-bold text-slate-900">Pacote Premium</span>, com acesso total às 100 Dinâmicas de Filosofia e R$ 47 em bônus inclusos.
               </p>
               
               <div className="bg-gray-50 rounded-2xl p-5 mb-6 text-left space-y-2">
@@ -228,7 +228,7 @@ const UpsellModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
               
               <div className="mb-6">
                 <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">POR APENAS:</div>
-                <div className="text-3xl font-black text-slate-900">R$ 12,90</div>
+                <div className="text-3xl font-black text-slate-900">R$ 14,90</div>
               </div>
               
               <div className="space-y-2">
@@ -236,7 +236,7 @@ const UpsellModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
                   onClick={() => window.location.href = 'https://pay.hotmart.com/E105388531E?off=qk71rb1f&checkoutMode=10' + window.location.search.replace('?', '&')}
                   className="w-full bg-green-600 hover:bg-green-700 text-white font-black py-4 rounded-xl text-xs uppercase tracking-wider shadow-lg shadow-green-600/20 transition-all active:scale-95 leading-tight"
                 >
-                  SIM, QUERO COMPRAR AGORA O PACOTE PREMIUM POR R$ 12,90
+                  SIM, QUERO COMPRAR AGORA O PACOTE PREMIUM POR R$ 14,90
                 </button>
                 <button 
                   onClick={() => window.location.href = 'https://pay.hotmart.com/A105388396S?off=wg24utz1&checkoutMode=10' + window.location.search.replace('?', '&')}
@@ -418,7 +418,7 @@ export default function App() {
               type="Pacote Completo (Upgrade)"
               title="+200 Dinâmicas de Filosofia + Bônus Exclusivos"
               oldPrice="R$ 247"
-              price="19,90"
+              price="27,90"
               onClick={() => window.location.href = 'https://pay.hotmart.com/F105388251G?checkoutMode=10' + window.location.search.replace('?', '&')}
               modules={[
                 "Módulo 1: Ética e Moral",
