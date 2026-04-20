@@ -208,7 +208,7 @@ const UpsellModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
             <div className="p-6 text-center">
               <h2 className="text-xl font-black text-slate-900 mb-3">Espere! Antes de finalizar...</h2>
               <p className="text-gray-600 text-sm leading-relaxed mb-6">
-                Você escolheu o plano básico di <span className="font-bold text-slate-900">R$ 9,90</span>, mas por apenas <span className="font-bold text-sky-600">R$ 5 a mais</span> você pode liberar o <span className="font-bold text-slate-900">Pacote Premium</span>, com acesso total às 100 Dinâmicas de Filosofia e R$ 47 em bônus inclusos.
+                Você escolheu o plano básico de <span className="font-bold text-slate-900">R$ 9,90</span>, mas por apenas <span className="font-bold text-sky-600">R$ 5 a mais</span> você pode liberar o <span className="font-bold text-slate-900">Pacote Premium</span>, com acesso total às 100 Dinâmicas de Filosofia e R$ 47 em bônus inclusos.
               </p>
               
               <div className="bg-gray-50 rounded-2xl p-5 mb-6 text-left space-y-2">
