@@ -253,6 +253,80 @@ const UpsellModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
   );
 };
 
+const PurchaseNotification = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [currentPurchase, setCurrentPurchase] = useState(0);
+
+  const purchases = [
+    { name: 'Ana Silva', location: 'São Paulo, SP' },
+    { name: 'Ricardo Mendes', location: 'Belo Horizonte, MG' },
+    { name: 'Juliana Costa', location: 'Curitiba, PR' },
+    { name: 'Fernando Oliveira', location: 'Salvador, BA' },
+    { name: 'Patrícia Lima', location: 'Fortaleza, CE' },
+    { name: 'Marcelo Santos', location: 'Porto Alegre, RS' },
+    { name: 'Luciana Ferreira', location: 'Rio de Janeiro, RJ' },
+    { name: 'Roberto Alencar', location: 'Brasília, DF' },
+    { name: 'Camila Rocha', location: 'Goiânia, GO' },
+    { name: 'Tiago Souza', location: 'Manaus, AM' }
+  ];
+
+  useEffect(() => {
+    // Show first notification after 2 seconds
+    const initialDelay = setTimeout(() => {
+      setIsVisible(true);
+    }, 2000);
+
+    return () => clearTimeout(initialDelay);
+  }, []);
+
+  useEffect(() => {
+    if (isVisible) {
+      // Hide after 5 seconds
+      const hideTimer = setTimeout(() => {
+        setIsVisible(false);
+        // Prepare next one
+        setTimeout(() => {
+          setCurrentPurchase((prev) => (prev + 1) % purchases.length);
+          setIsVisible(true);
+        }, 15000); // Wait 15 seconds before showing next one
+      }, 5000);
+
+      return () => clearTimeout(hideTimer);
+    }
+  }, [isVisible, purchases.length]);
+
+  return (
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div
+          initial={{ opacity: 0, x: -50, scale: 0.9 }}
+          animate={{ opacity: 1, x: 0, scale: 1 }}
+          exit={{ opacity: 0, x: -50, scale: 0.9 }}
+          className="fixed bottom-6 left-6 z-[100] flex items-center gap-3 bg-white/95 backdrop-blur-sm p-3 rounded-2xl shadow-xl border border-gray-100 max-w-[280px]"
+        >
+          <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center shrink-0">
+            <Check className="w-6 h-6 text-green-600" />
+          </div>
+          <div className="flex flex-col">
+            <p className="text-[11px] leading-tight text-slate-800">
+              <span className="font-bold">{purchases[currentPurchase].name}</span> de {purchases[currentPurchase].location}
+            </p>
+            <p className="text-[10px] text-gray-500 font-medium mt-0.5">
+              Acabou de comprar há poucos minutos
+            </p>
+          </div>
+          <button 
+            onClick={() => setIsVisible(false)}
+            className="absolute -top-1 -right-1 bg-white border border-gray-200 text-gray-400 hover:text-gray-600 rounded-full p-0.5 shadow-sm transition-colors"
+          >
+            <X className="w-3 h-3" />
+          </button>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
 // --- Main App ---
 
 export default function App() {
@@ -261,6 +335,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900 selection:bg-sky-100 selection:text-sky-900">
       
+      <PurchaseNotification />
       <UpsellModal isOpen={isUpsellOpen} onClose={() => setIsUpsellOpen(false)} />
       <div className="bg-red-600 text-white py-3 px-4 sticky top-0 z-50 shadow-lg flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
         <span className="text-xs sm:text-sm font-black uppercase tracking-widest text-center">
