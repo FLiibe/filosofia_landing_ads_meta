@@ -17,10 +17,27 @@ import {
   Film, 
   Gamepad2, 
   RefreshCw,
-  Clock
+  Clock,
+  BookOpen,
+  GraduationCap,
+  Zap,
+  Download,
+  Shield,
+  Headphones,
+  Brain,
+  MessageSquare
 } from 'lucide-react';
 
 // --- Components ---
+
+const FeatureBadge = ({ text }: { text: string }) => (
+  <div className="bg-[#22c55e] text-white px-5 py-2.5 rounded-full flex items-center gap-2 shadow-lg shadow-green-600/20 whitespace-nowrap">
+    <div className="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center shrink-0">
+      <Check className="w-3 h-3 text-white stroke-[4]" />
+    </div>
+    <span className="text-sm font-bold tracking-tight">{text}</span>
+  </div>
+);
 
 const Countdown = () => {
   const [timeLeft, setTimeLeft] = useState(7 * 60 + 22); // 7:22 in seconds
@@ -59,7 +76,7 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.3 }}
         >
-          <ChevronDown className="w-5 h-5 text-sky-500" />
+          <ChevronDown className="w-5 h-5 text-sky-600" />
         </motion.div>
       </button>
       <AnimatePresence>
@@ -82,78 +99,106 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
 
 const BonusCard = ({ imageUrl, title, value, index }: { imageUrl: string, title: string, value: string, index: number }) => (
   <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
+    initial={{ opacity: 0, scale: 0.95 }}
+    whileInView={{ opacity: 1, scale: 1 }}
     viewport={{ once: true }}
     transition={{ delay: index * 0.1 }}
-    className="bg-white rounded-xl p-6 text-center relative border border-gray-200 hover:border-sky-200 transition-all group shadow-sm"
+    className="bg-slate-50 rounded-[2rem] p-5 text-center border border-slate-100 shadow-sm flex flex-col h-full"
   >
-    <div className="bg-sky-500 text-white text-[10px] font-bold px-3 py-1 rounded-full inline-block mb-4 tracking-wider">
-      GRÁTIS
+    <div className="bg-white rounded-2xl p-4 mb-6 aspect-square flex items-center justify-center overflow-hidden shadow-sm">
+      <img src={imageUrl} alt={title} className="w-full h-full object-contain" referrerPolicy="no-referrer" />
     </div>
-    <div className="flex justify-center mb-4 transition-transform group-hover:scale-110 duration-300">
-      <img src={imageUrl} alt={title} className="w-20 h-20 object-contain" referrerPolicy="no-referrer" />
+    <h3 className="text-lg font-black text-slate-900 mb-6 leading-tight flex-grow px-1">{title}</h3>
+    <div className="mt-auto pb-2">
+      <div className="text-[11px] text-slate-400 font-bold uppercase line-through mb-1">
+        VALOR: {value}
+      </div>
+      <div className="text-3xl font-black text-sky-600 uppercase tracking-tighter">
+        GRÁTIS
+      </div>
     </div>
-    <h3 className="text-sm font-bold text-slate-900 mb-2 leading-tight">{title}</h3>
-    <div className="text-xs text-gray-400 line-through mb-1">Valor: {value}</div>
-    <div className="text-sm text-green-500 font-bold">GRÁTIS</div>
   </motion.div>
 );
 
 const PlanCard = ({ 
   type, 
   title, 
+  subtitle,
   description,
   oldPrice, 
   price, 
   features, 
   isFeatured = false,
   modules = [],
-  onClick
+  onClick,
+  topBadge,
+  customBadge,
+  highlightBanner
 }: { 
   type: string; 
   title: string; 
+  subtitle?: string;
   description?: string;
   oldPrice: string; 
   price: string; 
-  features: string[]; 
+  features: { text: string; icon: any }[]; 
   isFeatured?: boolean;
   modules?: string[];
   onClick?: () => void;
+  topBadge?: string;
+  customBadge?: string;
+  highlightBanner?: string;
 }) => (
   <motion.div
     whileHover={{ y: -5 }}
-    className={`bg-white rounded-2xl p-8 relative flex flex-col h-full border-2 ${
-      isFeatured ? 'border-sky-500 shadow-xl shadow-sky-500/10' : 'border-gray-200'
+    className={`bg-white rounded-3xl p-8 relative flex flex-col h-full border-2 transition-all ${
+      isFeatured ? 'border-sky-600 shadow-2xl shadow-sky-600/10' : 'border-gray-100 shadow-xl shadow-gray-200/20'
     }`}
   >
-    {isFeatured && (
-      <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-sky-500 text-white text-[10px] font-bold px-4 py-1.5 rounded-full tracking-widest whitespace-nowrap">
-        ✦ MAIS ESCOLHIDO
+    {topBadge && (
+      <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#f0c040] text-black text-[10px] sm:text-[11px] font-black px-6 py-2 rounded-full tracking-widest whitespace-nowrap shadow-lg flex items-center gap-1.5 uppercase">
+        <Star className="w-3 h-3 fill-current" />
+        {topBadge}
       </div>
     )}
-    <div className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1">{type}</div>
-    <h3 className="text-lg font-extrabold text-slate-900 mb-2 leading-tight">{title}</h3>
-    {description && <p className="text-xs text-gray-500 mb-4 leading-relaxed">{description}</p>}
     
-    <div className="mb-6">
-      <div className="text-sm text-gray-400 line-through">De {oldPrice}</div>
-      <div className="flex items-start">
-        <span className="text-2xl font-bold mt-2 mr-1 text-slate-900">R$</span>
-        <span className="text-5xl font-black text-slate-900 leading-none">{price.split(',')[0]}</span>
-        <span className="text-xl font-bold mt-2 text-slate-900">,{price.split(',')[1]}</span>
+    <div className="text-center mt-4">
+      <h3 className="text-2xl font-black text-slate-900 mb-1 uppercase tracking-tight">{title}</h3>
+      {subtitle && <p className="text-sm text-gray-500 font-medium mb-6">{subtitle}</p>}
+      
+      {customBadge && (
+        <div className="inline-flex items-center gap-1.5 bg-sky-600 text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider mb-6 shadow-sm">
+          <span className="text-sm">🔥</span>
+          {customBadge}
+        </div>
+      )}
+
+      <div className="mb-8">
+        <div className="text-sm text-gray-400 line-through font-medium mb-1">De {oldPrice}</div>
+        {!isFeatured && <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Por apenas</div>}
+        <div className="flex items-center justify-center">
+          <span className="text-3xl font-black mr-1 text-sky-600">R$</span>
+          <span className="text-6xl font-black text-sky-600 leading-none">{price.split(',')[0]}</span>
+          <span className="text-2xl font-black text-sky-600 self-start mt-1">,{price.split(',')[1]}</span>
+        </div>
+        <div className="text-[11px] font-black text-gray-400 mt-2 uppercase tracking-widest">PAGAMENTO ÚNICO</div>
       </div>
-      <div className="text-xs font-bold text-gray-500 mt-1 uppercase">PAGAMENTO ÚNICO</div>
-      {isFeatured && <div className="text-[11px] text-sky-500 font-bold mt-2">Desconto por transferência • Acesso vitalício</div>}
     </div>
 
+    {highlightBanner && (
+      <div className="bg-sky-600 text-white py-3 px-4 rounded-xl font-black text-xs uppercase tracking-widest mb-8 text-center flex items-center justify-center gap-2 shadow-lg shadow-sky-600/20">
+        <Zap className="w-4 h-4 fill-white" />
+        {highlightBanner}
+      </div>
+    )}
+
     {modules.length > 0 && (
-      <div className="bg-gray-50 rounded-xl p-4 mb-6 text-xs">
-        <strong className="block mb-2 text-slate-900 uppercase tracking-wider">Conteúdo:</strong>
-        <ul className="space-y-1.5">
+      <div className="bg-gray-50 rounded-2xl p-5 mb-8 text-[13px] border border-gray-100">
+        <strong className="block mb-3 text-slate-900 uppercase tracking-widest text-[10px] font-black opacity-40">Estrutura do Curso:</strong>
+        <ul className="space-y-2">
           {modules.map((mod, i) => (
-            <li key={i} className="flex items-center gap-2 text-gray-600">
-              <span className="w-1 h-1 bg-sky-500 rounded-full" />
+            <li key={i} className="flex items-center gap-2.5 text-gray-600 font-medium">
+              <div className="w-1.5 h-1.5 bg-sky-600 rounded-full shrink-0" />
               {mod}
             </li>
           ))}
@@ -161,24 +206,28 @@ const PlanCard = ({
       </div>
     )}
 
-    <ul className="space-y-3 mb-8 flex-grow">
+    <ul className="space-y-4 mb-10 flex-grow">
       {features.map((feature, i) => (
-        <li key={i} className="flex items-start gap-3 text-sm text-gray-700">
-          <Check className="w-4 h-4 text-green-500 shrink-0 mt-0.5" />
-          <span>{feature}</span>
+        <li key={i} className="flex items-start gap-4 text-[13.5px] font-bold text-slate-700">
+          <div className="p-1.5 bg-sky-50 rounded-lg shrink-0">
+            <feature.icon className="w-4 h-4 text-sky-600" />
+          </div>
+          <span>{feature.text}</span>
         </li>
       ))}
     </ul>
 
-    <button 
-      onClick={onClick}
-      className="w-full py-4 rounded-xl font-bold text-sm uppercase tracking-wider transition-all active:scale-95 bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-600/20">
-      Comprar Agora
-    </button>
-    
-    <div className="flex items-center justify-center gap-2 mt-4 text-[10px] text-gray-400 font-medium">
-      <Lock className="w-3 h-3" />
-      Ambiente seguro para pagamentos
+    <div className="mt-auto pt-6">
+      <button 
+        onClick={onClick}
+        className="w-full py-5 rounded-2xl font-black text-base uppercase tracking-widest transition-all active:scale-95 shadow-xl bg-[#22c55e] hover:bg-[#16a34a] text-white shadow-green-500/20">
+        Quero o {title.split(' ')[1]}
+      </button>
+      
+      <div className="flex items-center justify-center gap-2 mt-5 text-[10px] text-gray-400 font-bold uppercase tracking-widest opacity-60">
+        <Lock className="w-3.5 h-3.5" />
+        Ambiente 100% Seguro
+      </div>
     </div>
   </motion.div>
 );
@@ -206,43 +255,43 @@ const UpsellModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
             </div>
             
             <div className="p-6 text-center">
-              <h2 className="text-xl font-black text-slate-900 mb-3">Espere! Antes de finalizar...</h2>
+              <h2 className="text-xl font-black text-slate-900 mb-3 uppercase tracking-tight">Espere! Antes de finalizar...</h2>
               <p className="text-gray-600 text-sm leading-relaxed mb-6">
-                Você escolheu o plano básico de <span className="font-bold text-slate-900">R$ 9,90</span>, mas por apenas <span className="font-bold text-sky-600">R$ 5 a mais</span> você pode liberar o <span className="font-bold text-slate-900">Pacote Premium</span>, com acesso total às 100 Dinâmicas de Filosofia e R$ 47 em bônus inclusos.
+                Você escolheu o plano básico de <span className="font-bold text-slate-900">R$ 17,90</span>, mas apenas agora você pode garantir o <span className="font-bold text-sky-600">Pacote Completo</span> (com +400 dinâmicas e todos os bônus inclusos) por apenas <span className="font-bold text-slate-900">R$ 37,90</span>.
               </p>
               
               <div className="bg-gray-50 rounded-2xl p-5 mb-6 text-left space-y-2">
                 <div className="flex items-center gap-3 text-xs font-bold text-slate-800">
-                  <Check className="w-4 h-4 text-green-500" />
-                  100 DINÂMICAS DE FILOSOFIA
+                  <Check className="w-4 h-4 text-[#22c55e]" />
+                  +400 DINÂMICAS DE FILOSOFIA E SOCIOLOGIA
                 </div>
                 <div className="flex items-center gap-3 text-xs font-bold text-slate-800">
-                  <Check className="w-4 h-4 text-green-500" />
+                  <Check className="w-4 h-4 text-[#22c55e]" />
+                  TODOS OS BÔNUS EXCLUSIVOS (VALOR R$ 278)
+                </div>
+                <div className="flex items-center gap-3 text-xs font-bold text-slate-800">
+                  <Check className="w-4 h-4 text-[#22c55e]" />
                   ACESSO VITALÍCIO + ATUALIZAÇÕES
-                </div>
-                <div className="flex items-center gap-3 text-xs font-bold text-slate-800">
-                  <Check className="w-4 h-4 text-green-500" />
-                  +R$ 47 EM BÔNUS INCLUSOS
                 </div>
               </div>
               
               <div className="mb-6">
-                <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">POR APENAS:</div>
-                <div className="text-3xl font-black text-slate-900">R$ 14,90</div>
+                <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1 leading-tight">DE R$ 59,90 POR APENAS:</div>
+                <div className="text-4xl font-black text-slate-900">R$ 37,90</div>
               </div>
               
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <button 
-                  onClick={() => window.location.href = 'https://pay.hotmart.com/E105388531E?off=qk71rb1f&checkoutMode=10' + window.location.search.replace('?', '&')}
-                  className="w-full bg-green-600 hover:bg-green-700 text-white font-black py-4 rounded-xl text-xs uppercase tracking-wider shadow-lg shadow-green-600/20 transition-all active:scale-95 leading-tight"
+                  onClick={() => window.location.href = 'https://pay.hotmart.com/E105388531E?checkoutMode=10' + window.location.search.replace('?', '&')}
+                  className="w-full bg-[#22c55e] hover:bg-[#16a34a] text-white font-black py-5 rounded-2xl text-xs uppercase tracking-widest shadow-xl shadow-green-500/20 transition-all active:scale-95 leading-tight"
                 >
-                  SIM, QUERO COMPRAR AGORA O PACOTE PREMIUM POR R$ 14,90
+                  SIM! QUERO O PACOTE COMPLETO POR R$ 37,90
                 </button>
                 <button 
-                  onClick={() => window.location.href = 'https://pay.hotmart.com/A105388396S?off=wg24utz1&checkoutMode=10' + window.location.search.replace('?', '&')}
+                  onClick={() => window.location.href = 'https://pay.hotmart.com/A105388396S?checkoutMode=10&bid=1778765015412' + window.location.search.replace('?', '&')}
                   className="w-full text-gray-400 hover:text-gray-600 font-bold py-2 text-[10px] uppercase tracking-widest transition-colors"
                 >
-                  QUERO COMPRAR APENAS O PLANO BÁSICO POR R$ 9,90.
+                  NÃO, QUERO APENAS O PLANO BÁSICO POR R$ 17,90.
                 </button>
               </div>
             </div>
@@ -347,7 +396,7 @@ export default function App() {
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-white text-slate-900 pt-20 pb-24 px-6 border-b border-gray-50">
         <div className="absolute inset-0 opacity-5 pointer-events-none">
-          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,#0ea5e9_0%,transparent_50%)] blur-3xl transform -translate-y-1/2" />
+          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,#0284c7_0%,transparent_50%)] blur-3xl transform -translate-y-1/2" />
         </div>
         
         <div className="max-w-4xl mx-auto text-center relative z-10">
@@ -356,7 +405,7 @@ export default function App() {
             animate={{ opacity: 1, y: 0 }}
             className="text-3xl sm:text-5xl md:text-6xl font-black leading-[1.1] mb-8"
           >
-            +200 <span className="text-[#f0c040]">Dinâmicas</span> de <span className="text-[#f0c040]">Filosofia</span> que Vão Tornar Suas Aulas <span className="text-sky-600">Muito Mais Envolventes</span>
+            +400 <span className="text-[#f0c040]">Dinâmicas</span> que Tornam <span className="text-[#f0c040]">Filosofia e Sociologia</span> <span className="text-sky-600">3x Mais Envolvente</span> Para Qualquer Jovem
           </motion.h1>
 
           {/* Video Section */}
@@ -380,14 +429,16 @@ export default function App() {
             </video>
           </motion.div>
           
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-lg sm:text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed"
-          >
-            Transforme suas aulas de Filosofia em experiências onde os alunos refletem e debatem, sem gastar horas planejando do zero.
-          </motion.p>
+          <div className="flex flex-wrap justify-center gap-4 mb-10">
+            <FeatureBadge text="Desenvolve Pensamento Crítico" />
+            <FeatureBadge text="Conecta Teoria com a Vida Real" />
+            <FeatureBadge text="Para Fundamental II e Ensino Médio" />
+            <FeatureBadge text="Alinhadas à BNCC e Enem" />
+          </div>
+          
+          <p className="text-center text-slate-600 text-lg md:text-xl font-medium max-w-3xl mx-auto mb-10 leading-relaxed">
+            Transforme suas aulas de Filosofia e Sociologia em experiências que os alunos refletem e debatem sem passar horas planejando do zero.
+          </p>
           
           <motion.button 
             onClick={() => window.location.href = '#planos'}
@@ -396,7 +447,7 @@ export default function App() {
             transition={{ delay: 0.3 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-block bg-green-600 hover:bg-green-700 text-white font-black px-10 py-5 rounded-xl text-lg uppercase tracking-wider shadow-2xl shadow-green-600/40 transition-all cursor-pointer"
+            className="inline-block bg-[#22c55e] hover:bg-[#16a34a] text-white font-black px-10 py-5 rounded-2xl text-lg uppercase tracking-widest shadow-2xl shadow-green-500/20 transition-all cursor-pointer"
           >
             Quero minhas dinâmicas prontas
           </motion.button>
@@ -407,7 +458,7 @@ export default function App() {
       <section className="py-20 px-6 bg-white">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-3xl sm:text-4xl font-black mb-6 leading-tight">
-            O Problema <span className="text-sky-500 text-shadow-sm">Não É Você…</span>
+            O Problema <span className="text-sky-600 text-shadow-sm">Não É Você…</span>
           </h2>
           <p className="text-gray-500 font-bold mb-8 uppercase tracking-widest text-xs">Se você:</p>
           
@@ -427,7 +478,7 @@ export default function App() {
                 transition={{ delay: i * 0.1 }}
                 className="flex items-start gap-4 text-lg text-slate-800"
               >
-                <X className="w-6 h-6 text-sky-500 shrink-0 mt-1" />
+                <X className="w-6 h-6 text-sky-600 shrink-0 mt-1" />
                 <span>{item}</span>
               </motion.li>
             ))}
@@ -436,7 +487,7 @@ export default function App() {
           <div className="bg-green-50 border-l-8 border-green-500 rounded-r-xl p-8 text-green-900 shadow-sm">
             <p className="text-xl font-black mb-2">Respira.</p>
             <p className="text-lg leading-relaxed">
-              Com as <strong className="text-green-700">DINÂMICAS PRONTAS</strong>, você vai conseguir que qualquer jovem pense, argumente e se interesse pela aula de Filosofia com profundidade e leveza.
+              Com as <strong className="text-green-700">DINÂMICAS PRONTAS DE FILOSOFIA E SOCIOLOGIA</strong>, você vai conseguir que qualquer jovem pense, argumente e se interesse pela aula de Filosofia e Sociologia com profundidade e leveza.
             </p>
           </div>
         </div>
@@ -450,70 +501,75 @@ export default function App() {
           </h2>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
-            <BonusCard index={0} imageUrl="https://i.ibb.co/7xBmSs9s/50-dilemas-e-ticos-e-pensamentos.png" title="+50 Dilemas Éticos e Experimentos de Pensamento" value="R$ 97" />
-            <BonusCard index={1} imageUrl="https://i.ibb.co/rfN8rHBD/30-roteiros-de-debate-e-perguntas.png" title="+30 Roteiros de Debate e Perguntas Provocadoras" value="R$ 47" />
-            <BonusCard index={2} imageUrl="https://i.ibb.co/rKJGhF2F/Dina-micas-filoso-ficas-no-cinema.png" title="Dinâmicas de Filosofia com Filmes e Séries" value="R$ 67" />
-            <BonusCard index={3} imageUrl="https://i.ibb.co/xK9mq9dJ/Jogos-filoso-ficos-na-sala-de-aula.png" title="+20 Jogos de Filosofia para a Sala de Aula" value="R$ 67" />
+            <BonusCard index={0} imageUrl="https://i.ibb.co/5gbhr3fN/genera-un-immagine-di-copertina-202605131122.jpg" title="+100 Dilemas Éticos e Experimentos de Pensamento" value="R$ 97" />
+            <BonusCard index={1} imageUrl="https://i.ibb.co/yn64DVHV/genera-un-immagine-di-copertina-202605131125.jpg" title="+60 Roteiros de Debate e Perguntas Provocadoras" value="R$ 47" />
+            <BonusCard index={2} imageUrl="https://i.ibb.co/hQJ6SPB/Copertina-cartoon-Dina-micas-Filo-202605131128.jpg" title="+50 Dinâmicas de Filosofia e Sociologia com Filmes e Séries" value="R$ 67" />
+            <BonusCard index={3} imageUrl="https://i.ibb.co/3YTtc3TQ/Cartoon-cover-image-for-games-202605131131.jpg" title="+40 Jogos de Filosofia e Sociologia para a Sala de Aula" value="R$ 67" />
           </div>
           
           <p className="text-center text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Todos esses bônus custariam mais de <strong className="text-sky-600">R$ 278</strong>, mas <span className="text-slate-900 font-bold underline decoration-sky-500 decoration-4 underline-offset-4">somente hoje</span> você os leva <strong className="text-green-600">GRATUITAMENTE!</strong>
+            Todos esses bônus custariam mais de <strong className="text-sky-600">R$ 278</strong>, mas <span className="text-slate-900 font-bold underline decoration-sky-600 decoration-4 underline-offset-4">somente hoje</span> você os leva <strong className="text-green-600">GRATUITAMENTE!</strong>
           </p>
         </div>
       </section>
 
       {/* Plans Section */}
-      <section id="planos" className="py-24 px-6 bg-white">
+      <section id="planos" className="py-24 px-6 bg-[#f8fafc]">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-black text-center mb-4 leading-tight">
-            Escolha Seu Plano <span className="text-sky-500">Últimas Vagas Neste Valor Promocional</span>
-          </h2>
-          <p className="text-center text-gray-500 mb-16 font-medium">Mais de 1.350 professores de Humanidades aprovam este material.</p>
+          <div className="flex flex-col items-center mb-16">
+            <h2 className="text-4xl sm:text-5xl font-black text-center mb-6 leading-tight">
+              Escolha Seu <span className="text-sky-600">Plano</span>
+            </h2>
+            <div className="bg-red-50 border border-red-100 rounded-2xl px-8 py-3.5 flex items-center gap-2 shadow-sm">
+              <span className="text-xl">⚠️</span>
+              <span className="text-red-900 font-black text-sm tracking-tight uppercase">Últimas unidades por esse valor promocional</span>
+            </div>
+          </div>
           
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto items-stretch">
             <PlanCard 
-              type="Plano Básico"
-              title="100 Dinâmicas de Filosofia (Pacote Essencial)"
-              description="Material prático e pronto para aplicar em sala de aula, focado em Ensino Médio e Fundamental II. Totalmente alinhado à BNCC."
-              oldPrice="R$ 127"
-              price="9,90"
+              type="Pacote Básico"
+              title="PACOTE BÁSICO"
+              subtitle="Para quem quer testar o método"
+              oldPrice="R$ 97,00"
+              price="17,90"
               onClick={() => setIsUpsellOpen(true)}
               features={[
-                "100 Dinâmicas de Filosofia",
-                "Para Ensino Médio e Fundamental II",
-                "Acesso digital imediato",
-                "Entrega instantânea",
-                "Materiais 100% baixáveis",
-                "Suporte 24h",
-                "Garantia de 7 dias"
+                { text: "+200 Dinâmicas de Filosofia e Sociologia", icon: BookOpen },
+                { text: "Garantia de 7 dias", icon: ShieldCheck }
               ]}
             />
             <PlanCard 
               isFeatured
-              type="Pacote Completo (Upgrade)"
-              title="+200 Dinâmicas de Filosofia + Bônus Exclusivos"
-              oldPrice="R$ 247"
-              price="27,90"
-              onClick={() => window.location.href = 'https://pay.hotmart.com/F105388251G?checkoutMode=10' + window.location.search.replace('?', '&')}
+              topBadge="MELHOR CUSTO BENEFÍCIO"
+              customBadge="MAIS VENDIDO"
+              highlightBanner="ACESSO VITALÍCIO"
+              type="Pacote Completo"
+              title="PACOTE COMPLETO"
+              subtitle="Para transformar suas aulas o ano todo"
+              oldPrice="R$ 397,00"
+              price="59,90"
+              onClick={() => window.location.href = 'https://pay.hotmart.com/F105388251G?checkoutMode=10&bid=1778765474761' + window.location.search.replace('?', '&')}
               modules={[
-                "Módulo 1: Ética e Moral",
-                "Módulo 2: Teoria do Conhecimento",
-                "Módulo 3: Filosofia Política",
-                "Módulo 4: Lógica e Argumentação",
-                "Módulo 5: Metafísica e Existência",
-                "Módulo 6: Estética e Arte",
-                "Módulo 7: Filosofia no Cotidiano"
+                "Filosofia (Ética, Política, Lógica, Estética...)",
+                "Cultura e Identidade Social",
+                "Estratificação e Desigualdade Social",
+                "Instituições Sociais",
+                "Movimentos Sociais e Cidadania",
+                "Trabalho, Economia e Globalização",
+                "Sociologia Contemporânea"
               ]}
               features={[
-                "BÔNUS 1: +50 Dilemas Éticos (GRÁTIS)",
-                "BÔNUS 2: +30 Roteiros de Debate (GRÁTIS)",
-                "Guia Completo de Dinâmicas Filosóficas",
-                "Filosofia com Filmes e Séries – Pacote Completo",
-                "Biblioteca Filosófica Digital – +100 Textos",
-                "Para Ensino Médio e Pré-Vestibular",
-                "Alinhado às diretrizes educacionais (BNCC)",
-                "Entrega instantânea • Suporte 24h",
-                "Garantia de 7 dias"
+                { text: "+400 Dinâmicas de Filosofia e Sociologia", icon: BookOpen },
+                { text: "+100 Dilemas Éticos e Experimentos de Pensamento (GRÁTIS)", icon: Brain },
+                { text: "+60 Roteiros de Debate e Perguntas Provocadoras (GRÁTIS)", icon: MessageSquare },
+                { text: "+50 Dinâmicas de Filosofia e Sociologia com Filmes e Séries (GRÁTIS)", icon: Film },
+                { text: "+40 Jogos de Filosofia e Sociologia para a Sala de Aula (GRÁTIS)", icon: Gamepad2 },
+                { text: "Para Fundamental II e Ensino Médio", icon: GraduationCap },
+                { text: "Acesso digital imediato", icon: Zap },
+                { text: "Materiais 100% Baixáveis", icon: Download },
+                { text: "Metodologia Comprovada", icon: Star },
+                { text: "Garantia de 7 dias", icon: ShieldCheck }
               ]}
             />
           </div>
@@ -524,7 +580,7 @@ export default function App() {
       <section className="py-24 px-6 bg-white">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl sm:text-4xl font-black text-center mb-16 leading-tight">
-            Veja o Que os Professores <span className="text-sky-500">Estão Dizendo</span>
+            Veja o Que os Professores <span className="text-sky-600">Estão Dizendo</span>
           </h2>
           
           <div className="grid md:grid-cols-3 gap-8">
@@ -532,7 +588,7 @@ export default function App() {
               {
                 text: "Este material transformou minhas aulas. Meus alunos, que antes se entediavam com a teoria, agora participam ativamente de cada debate. É incrível vê-los pensar por conta própria!",
                 author: "Prof. Ricardo Santos",
-                role: "Filosofia Ensino Médio"
+                role: "Humanidades (Filosofia e Sociologia)"
               },
               {
                 text: "As dinâmicas são práticas e já chegam prontas para aplicar. Economizo horas de planejamento e ainda consigo resultados muito melhores. Recomendo demais!",
@@ -540,9 +596,9 @@ export default function App() {
                 role: "Coordenadora Pedagógica"
               },
               {
-                text: "Finalmente um material que conecta os filósofos clássicos com o mundo dos alunos de hoje. A turma passou a fazer perguntas que eu nunca esperava ouvir!",
+                text: "Finalmente um material que conecta os filósofos e sociólogos clássicos com o mundo dos alunos de hoje. A turma passou a fazer perguntas que eu nunca esperava ouvir!",
                 author: "Prof. Fernando Silva",
-                role: "Filosofia Cursinho Pré-Vestibular"
+                role: "Humanidades - Cursinho"
               }
             ].map((testi, i) => (
               <motion.div 
@@ -551,7 +607,7 @@ export default function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-gray-50 rounded-2xl p-8 border-l-4 border-sky-500 shadow-sm"
+                className="bg-gray-50 rounded-2xl p-8 border-l-4 border-sky-600 shadow-sm"
               >
                 <div className="flex gap-1 mb-4">
                   {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />)}
@@ -571,17 +627,17 @@ export default function App() {
       <section className="py-24 px-6 bg-white border-y border-gray-50">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl sm:text-4xl font-black text-center mb-16 leading-tight">
-            Conheça a <span className="text-sky-600">Ana Valentina Lima</span>
+            Conheça a <span className="text-sky-600">Paula Ribeiro Pinto</span>
           </h2>
           
           <div className="flex flex-col md:flex-row items-center md:items-start gap-12">
             <div className="w-40 h-40 rounded-full overflow-hidden shrink-0 shadow-2xl shadow-slate-900/10">
-              <img src="https://i.ibb.co/MxFTJ4JV/Retrato-de-mulher-com-sorriso-radiante.png" alt="Ana Valentina Lima" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+              <img src="https://i.ibb.co/V0hHhpYd/Chat-GPT-Image-14-de-mai-de-2026-10-57-22.png" alt="Paula Ribeiro Pinto" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
             </div>
             <div className="text-center md:text-left">
-              <h3 className="text-2xl font-black text-slate-900 mb-4">Ana Valentina Lima</h3>
+              <h3 className="text-2xl font-black text-slate-900 mb-4">Paula Ribeiro Pinto</h3>
               <p className="text-lg text-gray-600 leading-relaxed mb-8">
-                Filósofa, especialista em ensino de Humanidades. Com mais de 15 anos em sala de aula, desenvolveu o método de Dinâmicas de Filosofia Ativa para ajudar professores a formar pensadores críticos, fugindo da teoria árida no quadro-negro.
+                Filósofa e Socióloga, especialista em ensino de Humanidades. Com mais de 15 anos em sala de aula, desenvolveu o método de Dinâmicas Ativas para ajudar professores a formar pensadores críticos, fugindo da teoria árida no quadro-negro.
               </p>
               
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -591,7 +647,7 @@ export default function App() {
                   { num: "1.350+", label: "Avaliações positivas" }
                 ].map((stat, i) => (
                   <div key={i} className="bg-white rounded-xl p-5 border border-gray-100 shadow-sm text-center">
-                    <div className="text-2xl font-black text-sky-500 mb-1">{stat.num}</div>
+                    <div className="text-2xl font-black text-sky-600 mb-1">{stat.num}</div>
                     <div className="text-[10px] uppercase tracking-widest font-bold text-gray-400">{stat.label}</div>
                   </div>
                 ))}
@@ -627,13 +683,13 @@ export default function App() {
       <section className="py-24 px-6 bg-white border-t border-gray-50">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-3xl sm:text-4xl font-black text-center mb-16 leading-tight">
-            Perguntas <span className="text-sky-500">Frequentes</span>
+            Perguntas <span className="text-sky-600">Frequentes</span>
           </h2>
           
           <div className="space-y-4">
             <FAQItem 
               question="Para quais níveis serve?" 
-              answer="O material foi desenvolvido para o Ensino Médio e cursos Pré-Vestibular, podendo ser adaptado para o 9º ano do Ensino Fundamental e cursos livres de Filosofia." 
+              answer="O material foi desenvolvido para o Ensino Médio e cursos Pré-Vestibular, podendo ser adaptado para o 9º ano do Ensino Fundamental e cursos livres de Humanidades." 
             />
             <FAQItem 
               question="Serve para temas complexos?" 
@@ -645,7 +701,7 @@ export default function App() {
             />
             <FAQItem 
               question="Ajuda na preparação para o ENEM?" 
-              answer="Sim! As dinâmicas estimulam o pensamento crítico, a argumentação e a leitura filosófica habilidades exigidas nas questões de Ciências Humanas do ENEM." 
+              answer="Sim! As dinâmicas estimulam o pensamento crítico, a argumentação e a leitura de Humanidades habilidades exigidas nas questões de Ciências Humanas do ENEM." 
             />
             <FAQItem 
               question="As dinâmicas estão alinhadas à BNCC?" 
@@ -663,16 +719,16 @@ export default function App() {
       <section className="py-24 px-6 bg-white text-slate-900 text-center border-y border-gray-100">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-3xl sm:text-4xl font-black mb-6 leading-tight">
-            Quero Minhas <span className="text-sky-600">Dinâmicas Prontas</span>
+            Quero Minhas <span className="text-sky-600">Dinâmicas de Filosofia e Sociologia</span>
           </h2>
           <p className="text-lg text-gray-600 mb-10 leading-relaxed">
-            Clique abaixo e tenha acesso imediato às dinâmicas que estão transformando as aulas de Filosofia no Brasil.
+            Clique abaixo e tenha acesso imediato às dinâmicas que estão transformando as aulas de Filosofia e Sociologia no Brasil.
           </p>
           <motion.button 
             onClick={() => window.location.href = '#planos'}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-block bg-green-600 hover:bg-green-700 text-white font-black px-12 py-5 rounded-xl text-lg uppercase tracking-wider shadow-2xl shadow-green-600/20 transition-all cursor-pointer"
+            className="inline-block bg-[#22c55e] hover:bg-[#16a34a] text-white font-black px-12 py-5 rounded-2xl text-lg uppercase tracking-widest shadow-2xl shadow-green-500/20 transition-all cursor-pointer"
           >
             Garantir Meu Acesso Agora
           </motion.button>
@@ -684,9 +740,9 @@ export default function App() {
         <div className="max-w-5xl mx-auto">
           <p className="text-sm font-medium">© 2026 – Todos os direitos reservados. Este projeto é protegido por direitos autorais.</p>
           <div className="mt-4 flex items-center justify-center gap-6 text-xs font-bold uppercase tracking-widest">
-            <a href="#" className="hover:text-sky-500 transition-colors">Privacidade</a>
-            <a href="#" className="hover:text-sky-500 transition-colors">Termos de Uso</a>
-            <a href="#" className="hover:text-sky-500 transition-colors">Contato</a>
+            <a href="#" className="hover:text-sky-600 transition-colors">Privacidade</a>
+            <a href="#" className="hover:text-sky-600 transition-colors">Termos de Uso</a>
+            <a href="#" className="hover:text-sky-600 transition-colors">Contato</a>
           </div>
         </div>
       </footer>
