@@ -257,7 +257,7 @@ const UpsellModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
             <div className="p-6 text-center">
               <h2 className="text-xl font-black text-slate-900 mb-3 uppercase tracking-tight">Espere! Antes de finalizar...</h2>
               <p className="text-gray-600 text-sm leading-relaxed mb-6">
-                Você escolheu o plano básico de <span className="font-bold text-slate-900">R$ 17,90</span>, mas apenas agora você pode garantir o <span className="font-bold text-sky-600">Pacote Completo</span> (com +400 dinâmicas e todos os bônus inclusos) por apenas <span className="font-bold text-slate-900">R$ 37,90</span>.
+                Você escolheu o plano básico de <span className="font-bold text-slate-900">R$ 17,90</span>, mas apenas agora você pode garantir o <span className="font-bold text-sky-600">Pacote Completo</span> (com +400 dinâmicas e todos os bônus inclusos) por apenas <span className="font-bold text-slate-900">R$ 27,90</span>.
               </p>
               
               <div className="bg-gray-50 rounded-2xl p-5 mb-6 text-left space-y-2">
@@ -276,8 +276,8 @@ const UpsellModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
               </div>
               
               <div className="mb-6">
-                <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1 leading-tight">DE R$ 59,90 POR APENAS:</div>
-                <div className="text-4xl font-black text-slate-900">R$ 37,90</div>
+                <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1 leading-tight">DE R$ 37,90 POR APENAS:</div>
+                <div className="text-4xl font-black text-slate-900">R$ 27,90</div>
               </div>
               
               <div className="space-y-3">
@@ -285,7 +285,7 @@ const UpsellModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
                   onClick={() => window.location.href = 'https://pay.hotmart.com/E105388531E?checkoutMode=10' + window.location.search.replace('?', '&')}
                   className="w-full bg-[#22c55e] hover:bg-[#16a34a] text-white font-black py-5 rounded-2xl text-xs uppercase tracking-widest shadow-xl shadow-green-500/20 transition-all active:scale-95 leading-tight"
                 >
-                  SIM! QUERO O PACOTE COMPLETO POR R$ 37,90
+                  SIM! QUERO O PACOTE COMPLETO POR R$ 27,90
                 </button>
                 <button 
                   onClick={() => window.location.href = 'https://pay.hotmart.com/A105388396S?checkoutMode=10&bid=1778765015412' + window.location.search.replace('?', '&')}
@@ -548,7 +548,7 @@ export default function App() {
               title="PACOTE COMPLETO"
               subtitle="Para transformar suas aulas o ano todo"
               oldPrice="R$ 397,00"
-              price="59,90"
+              price="37,90"
               onClick={() => window.location.href = 'https://pay.hotmart.com/F105388251G?checkoutMode=10&bid=1778765474761' + window.location.search.replace('?', '&')}
               modules={[
                 "Filosofia (Ética, Política, Lógica, Estética...)",
