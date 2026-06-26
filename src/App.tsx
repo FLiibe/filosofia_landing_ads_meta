@@ -131,6 +131,7 @@ const PlanCard = ({
   isFeatured = false,
   modules = [],
   onClick,
+  href,
   topBadge,
   customBadge,
   highlightBanner
@@ -145,6 +146,7 @@ const PlanCard = ({
   isFeatured?: boolean;
   modules?: string[];
   onClick?: () => void;
+  href?: string;
   topBadge?: string;
   customBadge?: string;
   highlightBanner?: string;
@@ -218,11 +220,19 @@ const PlanCard = ({
     </ul>
 
     <div className="mt-auto pt-6">
-      <button 
-        onClick={onClick}
-        className="w-full py-5 rounded-2xl font-black text-base uppercase tracking-widest transition-all active:scale-95 shadow-xl bg-[#22c55e] hover:bg-[#16a34a] text-white shadow-green-500/20">
-        Quero o {title.split(' ')[1]}
-      </button>
+      {href ? (
+        <a 
+          href={href}
+          className="block w-full py-5 rounded-2xl font-black text-base uppercase tracking-widest text-center transition-all active:scale-95 shadow-xl bg-[#22c55e] hover:bg-[#16a34a] text-white shadow-green-500/20">
+          Quero o {title.split(' ')[1]}
+        </a>
+      ) : (
+        <button 
+          onClick={onClick}
+          className="w-full py-5 rounded-2xl font-black text-base uppercase tracking-widest transition-all active:scale-95 shadow-xl bg-[#22c55e] hover:bg-[#16a34a] text-white shadow-green-500/20">
+          Quero o {title.split(' ')[1]}
+        </button>
+      )}
       
       <div className="flex items-center justify-center gap-2 mt-5 text-[10px] text-gray-400 font-bold uppercase tracking-widest opacity-60">
         <Lock className="w-3.5 h-3.5" />
@@ -281,18 +291,18 @@ const UpsellModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
               </div>
               
               <div className="space-y-3">
-                <button 
-                  onClick={() => window.location.href = 'https://pay.hotmart.com/E105388531E?checkoutMode=10' + window.location.search.replace('?', '&')}
-                  className="w-full bg-[#22c55e] hover:bg-[#16a34a] text-white font-black py-5 rounded-2xl text-xs uppercase tracking-widest shadow-xl shadow-green-500/20 transition-all active:scale-95 leading-tight"
+                <a 
+                  href={'https://pay.hotmart.com/E105388531E?checkoutMode=10' + (typeof window !== 'undefined' ? window.location.search.replace('?', '&') : '')}
+                  className="block w-full text-center bg-[#22c55e] hover:bg-[#16a34a] text-white font-black py-5 rounded-2xl text-xs uppercase tracking-widest shadow-xl shadow-green-500/20 transition-all active:scale-95 leading-tight"
                 >
                   SIM! QUERO O PACOTE COMPLETO POR R$ 27,90
-                </button>
-                <button 
-                  onClick={() => window.location.href = 'https://pay.hotmart.com/A105388396S?checkoutMode=10&bid=1778765015412' + window.location.search.replace('?', '&')}
-                  className="w-full text-gray-400 hover:text-gray-600 font-bold py-2 text-[10px] uppercase tracking-widest transition-colors"
+                </a>
+                <a 
+                  href={'https://pay.hotmart.com/A105388396S?checkoutMode=10&bid=1778765015412' + (typeof window !== 'undefined' ? window.location.search.replace('?', '&') : '')}
+                  className="block w-full text-center text-gray-400 hover:text-gray-600 font-bold py-2 text-[10px] uppercase tracking-widest transition-colors"
                 >
                   NÃO, QUERO APENAS O PLANO BÁSICO POR R$ 17,90.
-                </button>
+                </a>
               </div>
             </div>
           </motion.div>
@@ -440,17 +450,17 @@ export default function App() {
             Transforme suas aulas de Filosofia e Sociologia em experiências que os alunos refletem e debatem sem passar horas planejando do zero.
           </p>
           
-          <motion.button 
-            onClick={() => window.location.href = '#planos'}
+          <motion.a 
+            href="#planos"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-block bg-[#22c55e] hover:bg-[#16a34a] text-white font-black px-10 py-5 rounded-2xl text-lg uppercase tracking-widest shadow-2xl shadow-green-500/20 transition-all cursor-pointer"
+            className="inline-block bg-[#22c55e] hover:bg-[#16a34a] text-white font-black px-10 py-5 rounded-2xl text-lg uppercase tracking-widest shadow-2xl shadow-green-500/20 text-center transition-all cursor-pointer"
           >
             Quero minhas dinâmicas prontas
-          </motion.button>
+          </motion.a>
         </div>
       </section>
 
@@ -549,7 +559,7 @@ export default function App() {
               subtitle="Para transformar suas aulas o ano todo"
               oldPrice="R$ 397,00"
               price="37,90"
-              onClick={() => window.location.href = 'https://pay.hotmart.com/F105388251G?checkoutMode=10&bid=1778765474761' + window.location.search.replace('?', '&')}
+              href={'https://pay.hotmart.com/F105388251G?checkoutMode=10&bid=1778765474761' + (typeof window !== 'undefined' ? window.location.search.replace('?', '&') : '')}
               modules={[
                 "Filosofia (Ética, Política, Lógica, Estética...)",
                 "Cultura e Identidade Social",
@@ -585,38 +595,24 @@ export default function App() {
           
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              {
-                text: "Este material transformou minhas aulas. Meus alunos, que antes se entediavam com a teoria, agora participam ativamente de cada debate. É incrível vê-los pensar por conta própria!",
-                author: "Prof. Ricardo Santos",
-                role: "Humanidades (Filosofia e Sociologia)"
-              },
-              {
-                text: "As dinâmicas são práticas e já chegam prontas para aplicar. Economizo horas de planejamento e ainda consigo resultados muito melhores. Recomendo demais!",
-                author: "Profa. Juliana Oliveira",
-                role: "Coordenadora Pedagógica"
-              },
-              {
-                text: "Finalmente um material que conecta os filósofos e sociólogos clássicos com o mundo dos alunos de hoje. A turma passou a fazer perguntas que eu nunca esperava ouvir!",
-                author: "Prof. Fernando Silva",
-                role: "Humanidades - Cursinho"
-              }
-            ].map((testi, i) => (
+              "https://i.ibb.co/kVWkhx1j/Chat-GPT-Image-26-giu-2026-09-37-57.png",
+              "https://i.ibb.co/pj74Ff3d/Chat-GPT-Image-26-giu-2026-09-37-51.png",
+              "https://i.ibb.co/nNvfnd6f/Chat-GPT-Image-26-giu-2026-09-37-42.png"
+            ].map((imgUrl, i) => (
               <motion.div 
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-gray-50 rounded-2xl p-8 border-l-4 border-sky-600 shadow-sm"
+                className="bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100 hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
               >
-                <div className="flex gap-1 mb-4">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />)}
-                </div>
-                <p className="text-gray-700 italic mb-6 leading-relaxed">"{testi.text}"</p>
-                <div>
-                  <div className="font-bold text-slate-900">{testi.author}</div>
-                  <div className="text-xs text-gray-500 font-medium">{testi.role}</div>
-                </div>
+                <img 
+                  src={imgUrl} 
+                  alt={`Depoimento ${i + 1}`} 
+                  className="w-full h-auto object-contain block" 
+                  referrerPolicy="no-referrer" 
+                />
               </motion.div>
             ))}
           </div>
@@ -724,14 +720,14 @@ export default function App() {
           <p className="text-lg text-gray-600 mb-10 leading-relaxed">
             Clique abaixo e tenha acesso imediato às dinâmicas que estão transformando as aulas de Filosofia e Sociologia no Brasil.
           </p>
-          <motion.button 
-            onClick={() => window.location.href = '#planos'}
+          <motion.a 
+            href="#planos"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-block bg-[#22c55e] hover:bg-[#16a34a] text-white font-black px-12 py-5 rounded-2xl text-lg uppercase tracking-widest shadow-2xl shadow-green-500/20 transition-all cursor-pointer"
+            className="inline-block bg-[#22c55e] hover:bg-[#16a34a] text-white font-black px-12 py-5 rounded-2xl text-lg uppercase tracking-widest shadow-2xl shadow-green-500/20 text-center transition-all cursor-pointer"
           >
             Garantir Meu Acesso Agora
-          </motion.button>
+          </motion.a>
         </div>
       </section>
 
