@@ -432,7 +432,7 @@ export default function App() {
               onContextMenu={(e) => e.preventDefault()}
               disablePictureInPicture
               className="w-full h-full object-cover"
-              poster="https://i.ibb.co/v4gdPcvq/Captura-de-Tela-2026-04-15-a-s-17-48-58.png"
+              poster="/assets/images/video_poster.png"
             >
               <source src="https://res.cloudinary.com/dgncwrnvw/video/upload/q_auto/f_auto/v1776273299/vsl_finale_kxyppj.mp4" type="video/mp4" />
               Il tuo browser non supporta il tag video.
@@ -600,9 +600,9 @@ export default function App() {
           
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              "https://i.ibb.co/kVWkhx1j/Chat-GPT-Image-26-giu-2026-09-37-57.png",
-              "https://i.ibb.co/pj74Ff3d/Chat-GPT-Image-26-giu-2026-09-37-51.png",
-              "https://i.ibb.co/nNvfnd6f/Chat-GPT-Image-26-giu-2026-09-37-42.png"
+              "/assets/images/testimonial_1.png",
+              "/assets/images/testimonial_2.png",
+              "/assets/images/testimonial_3.png"
             ].map((imgUrl, i) => (
               <motion.div 
                 key={i}
@@ -633,7 +633,7 @@ export default function App() {
           
           <div className="flex flex-col md:flex-row items-center md:items-start gap-12">
             <div className="w-40 h-40 rounded-full overflow-hidden shrink-0 shadow-2xl shadow-slate-900/10">
-              <img src="https://i.ibb.co/V0hHhpYd/Chat-GPT-Image-14-de-mai-de-2026-10-57-22.png" alt="Paula Ribeiro Pinto" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+              <img src="/assets/images/paula_profile.png" alt="Paula Ribeiro Pinto" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
             </div>
             <div className="text-center md:text-left">
               <h3 className="text-2xl font-black text-slate-900 mb-4">Paula Ribeiro Pinto</h3>
