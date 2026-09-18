@@ -3,6 +3,42 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Global patch to prevent "Converting circular structure to JSON" crashes from third-party tracking scripts or platform wrappers inspecting DOM elements
+      (function() {
+        const originalStringify = JSON.stringify;
+        JSON.stringify = function(value, replacer, space) {
+          const seen = new WeakSet();
+          function customReplacer(key, val) {
+            if (typeof val === 'object' && val !== null) {
+              if (seen.has(val)) {
+                return '[Circular]';
+              }
+              seen.add(val);
+            }
+            if (val instanceof Element || (typeof val === 'object' && val !== null && val.nodeType)) {
+              return '[Element]';
+            }
+            if (typeof replacer === 'function') {
+              return replacer(key, val);
+            }
+            return val;
+          }
+          try {
+            if (typeof replacer === 'function' || !replacer) {
+              return originalStringify(value, customReplacer, space);
+            }
+            return originalStringify(value, replacer, space);
+          } catch (e) {
+            try {
+              return originalStringify(value, customReplacer, space);
+            } catch (err) {
+              return '"[Unserializable]"';
+            }
+          }
+        };
+      })();
+    </script>
     <title>+400 Dinâmicas que Tornam Filosofia e Sociologia 3x Mais Envolvente Para Qualquer Jovem</title>
     <meta name="description" content="Transforme suas aulas de Filosofia e Sociologia em experiências envolventes com mais de 400 dinâmicas prontas para aplicar. Material prático alinhado à BNCC." />
     

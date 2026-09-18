@@ -229,7 +229,7 @@ const PlanCard = ({
       ) : (
         <button 
           onClick={onClick}
-          className="w-full py-5 rounded-2xl font-black text-base uppercase tracking-widest transition-all active:scale-95 shadow-xl bg-[#22c55e] hover:bg-[#16a34a] text-white shadow-green-500/20">
+          className="w-full py-5 rounded-2xl font-black text-base uppercase tracking-widest transition-all active:scale-95 shadow-xl bg-white border-2 border-[#22c55e] text-[#22c55e] hover:bg-[#22c55e]/10 shadow-green-500/10 cursor-pointer">
           Quero o {title.split(' ')[1]}
         </button>
       )}
@@ -277,7 +277,7 @@ const UpsellModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
                 </div>
                 <div className="flex items-center gap-3 text-xs font-bold text-slate-800">
                   <Check className="w-4 h-4 text-[#22c55e]" />
-                  TODOS OS BÔNUS EXCLUSIVOS (VALOR R$ 278)
+                  TODOS OS BÔNUS EXCLUSIVOS (VALOR R$ 513)
                 </div>
                 <div className="flex items-center gap-3 text-xs font-bold text-slate-800">
                   <Check className="w-4 h-4 text-[#22c55e]" />
@@ -510,15 +510,20 @@ export default function App() {
             Somente Hoje no Pacote Completo <span className="text-sky-600">Bônus Exclusivos</span>
           </h2>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
-            <BonusCard index={0} imageUrl="https://i.ibb.co/5gbhr3fN/genera-un-immagine-di-copertina-202605131122.jpg" title="+100 Dilemas Éticos e Experimentos de Pensamento" value="R$ 97" />
-            <BonusCard index={1} imageUrl="https://i.ibb.co/yn64DVHV/genera-un-immagine-di-copertina-202605131125.jpg" title="+60 Roteiros de Debate e Perguntas Provocadoras" value="R$ 47" />
-            <BonusCard index={2} imageUrl="https://i.ibb.co/hQJ6SPB/Copertina-cartoon-Dina-micas-Filo-202605131128.jpg" title="+50 Dinâmicas de Filosofia e Sociologia com Filmes e Séries" value="R$ 67" />
-            <BonusCard index={3} imageUrl="https://i.ibb.co/3YTtc3TQ/Cartoon-cover-image-for-games-202605131131.jpg" title="+40 Jogos de Filosofia e Sociologia para a Sala de Aula" value="R$ 67" />
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-16">
+            <BonusCard index={0} imageUrl="/assets/images/bonus_ethical_dilemmas_1789756311957.jpg" title="+100 Dilemas Éticos e Experimentos de Pensamento" value="R$ 97" />
+            <BonusCard index={1} imageUrl="/assets/images/bonus_debate_scripts_1789756322568.jpg" title="+60 Roteiros de Debate e Perguntas Provocadoras" value="R$ 47" />
+            <BonusCard index={2} imageUrl="/assets/images/bonus_movies_series_1789756332670.jpg" title="+50 Dinâmicas de Filosofia e Sociologia com Filmes e Séries" value="R$ 67" />
+            <BonusCard index={3} imageUrl="/assets/images/bonus_educational_games_1789756344289.jpg" title="+40 Jogos de Filosofia e Sociologia para a Sala de Aula" value="R$ 67" />
+            <BonusCard index={4} imageUrl="/assets/images/bonus_active_evaluation_1789756353859.jpg" title="Guia Prático de Avaliação Ativa (Grelhas e Rubricas)" value="R$ 47" />
+            <BonusCard index={5} imageUrl="/assets/images/bonus_icebreakers_1789756362281.jpg" title="Atividades 'Quebra-Gelo' de 5 Minutos (Warm-ups)" value="R$ 37" />
+            <BonusCard index={6} imageUrl="/assets/images/bonus_inclusion_1789756371799.jpg" title="Guia 'Inclusão na Prática' (Adaptações TDAH e Autismo)" value="R$ 57" />
+            <BonusCard index={7} imageUrl="/assets/images/bonus_visual_resources_1789756381283.jpg" title="Kit de Recursos Visuais e Slides Interativos" value="R$ 47" />
+            <BonusCard index={8} imageUrl="/assets/images/bonus_pop_culture_1789756393432.jpg" title="Guia 'Filosofia e Sociologia Pop' (Memes, Séries e Pop)" value="R$ 47" />
           </div>
           
           <p className="text-center text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Todos esses bônus custariam mais de <strong className="text-sky-600">R$ 278</strong>, mas <span className="text-slate-900 font-bold underline decoration-sky-600 decoration-4 underline-offset-4">somente hoje</span> você os leva <strong className="text-green-600">GRATUITAMENTE!</strong>
+            Todos esses bônus custariam mais de <strong className="text-sky-600">R$ 513</strong>, mas <span className="text-slate-900 font-bold underline decoration-sky-600 decoration-4 underline-offset-4">somente hoje</span> você os leva <strong className="text-green-600">GRATUITAMENTE!</strong>
           </p>
         </div>
       </section>
