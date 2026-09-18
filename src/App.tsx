@@ -432,7 +432,7 @@ export default function App() {
               onContextMenu={(e) => e.preventDefault()}
               disablePictureInPicture
               className="w-full h-full object-cover"
-              poster="/assets/images/video_poster.png"
+              poster="/images/video_poster.png"
             >
               <source src="https://res.cloudinary.com/dgncwrnvw/video/upload/q_auto/f_auto/v1776273299/vsl_finale_kxyppj.mp4" type="video/mp4" />
               Il tuo browser non supporta il tag video.
@@ -511,15 +511,15 @@ export default function App() {
           </h2>
           
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-16">
-            <BonusCard index={0} imageUrl="/assets/images/bonus_ethical_dilemmas_1789756311957.jpg" title="+100 Dilemas Éticos e Experimentos de Pensamento" value="R$ 97" />
-            <BonusCard index={1} imageUrl="/assets/images/bonus_debate_scripts_1789756322568.jpg" title="+60 Roteiros de Debate e Perguntas Provocadoras" value="R$ 47" />
-            <BonusCard index={2} imageUrl="/assets/images/bonus_movies_series_1789756332670.jpg" title="+50 Dinâmicas de Filosofia e Sociologia com Filmes e Séries" value="R$ 67" />
-            <BonusCard index={3} imageUrl="/assets/images/bonus_educational_games_1789756344289.jpg" title="+40 Jogos de Filosofia e Sociologia para a Sala de Aula" value="R$ 67" />
-            <BonusCard index={4} imageUrl="/assets/images/bonus_active_evaluation_1789756353859.jpg" title="Guia Prático de Avaliação Ativa (Grelhas e Rubricas)" value="R$ 47" />
-            <BonusCard index={5} imageUrl="/assets/images/bonus_icebreakers_1789756362281.jpg" title="Atividades 'Quebra-Gelo' de 5 Minutos (Warm-ups)" value="R$ 37" />
-            <BonusCard index={6} imageUrl="/assets/images/bonus_inclusion_1789756371799.jpg" title="Guia 'Inclusão na Prática' (Adaptações TDAH e Autismo)" value="R$ 57" />
-            <BonusCard index={7} imageUrl="/assets/images/bonus_visual_resources_1789756381283.jpg" title="Kit de Recursos Visuais e Slides Interativos" value="R$ 47" />
-            <BonusCard index={8} imageUrl="/assets/images/bonus_pop_culture_1789756393432.jpg" title="Guia 'Filosofia e Sociologia Pop' (Memes, Séries e Pop)" value="R$ 47" />
+            <BonusCard index={0} imageUrl="/images/bonus_ethical_dilemmas_1789756311957.jpg" title="+100 Dilemas Éticos e Experimentos de Pensamento" value="R$ 97" />
+            <BonusCard index={1} imageUrl="/images/bonus_debate_scripts_1789756322568.jpg" title="+60 Roteiros de Debate e Perguntas Provocadoras" value="R$ 47" />
+            <BonusCard index={2} imageUrl="/images/bonus_movies_series_1789756332670.jpg" title="+50 Dinâmicas de Filosofia e Sociologia com Filmes e Séries" value="R$ 67" />
+            <BonusCard index={3} imageUrl="/images/bonus_educational_games_1789756344289.jpg" title="+40 Jogos de Filosofia e Sociologia para a Sala de Aula" value="R$ 67" />
+            <BonusCard index={4} imageUrl="/images/bonus_active_evaluation_1789756353859.jpg" title="Guia Prático de Avaliação Ativa (Grelhas e Rubricas)" value="R$ 47" />
+            <BonusCard index={5} imageUrl="/images/bonus_icebreakers_1789756362281.jpg" title="Atividades 'Quebra-Gelo' de 5 Minutos (Warm-ups)" value="R$ 37" />
+            <BonusCard index={6} imageUrl="/images/bonus_inclusion_1789756371799.jpg" title="Guia 'Inclusão na Prática' (Adaptações TDAH e Autismo)" value="R$ 57" />
+            <BonusCard index={7} imageUrl="/images/bonus_visual_resources_1789756381283.jpg" title="Kit de Recursos Visuais e Slides Interativos" value="R$ 47" />
+            <BonusCard index={8} imageUrl="/images/bonus_pop_culture_1789756393432.jpg" title="Guia 'Filosofia e Sociologia Pop' (Memes, Séries e Pop)" value="R$ 47" />
           </div>
           
           <p className="text-center text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
@@ -600,9 +600,9 @@ export default function App() {
           
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              "/assets/images/testimonial_1.png",
-              "/assets/images/testimonial_2.png",
-              "/assets/images/testimonial_3.png"
+              "/images/testimonial_1.png",
+              "/images/testimonial_2.png",
+              "/images/testimonial_3.png"
             ].map((imgUrl, i) => (
               <motion.div 
                 key={i}
@@ -633,7 +633,7 @@ export default function App() {
           
           <div className="flex flex-col md:flex-row items-center md:items-start gap-12">
             <div className="w-40 h-40 rounded-full overflow-hidden shrink-0 shadow-2xl shadow-slate-900/10">
-              <img src="/assets/images/paula_profile.png" alt="Paula Ribeiro Pinto" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+              <img src="/images/paula_profile.png" alt="Paula Ribeiro Pinto" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
             </div>
             <div className="text-center md:text-left">
               <h3 className="text-2xl font-black text-slate-900 mb-4">Paula Ribeiro Pinto</h3>
