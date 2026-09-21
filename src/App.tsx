@@ -5,6 +5,9 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import UpsellPage from './components/UpsellPage';
+import DownsellPage from './components/DownsellPage';
+import ThankYouPage from './components/ThankYouPage';
 import { 
   Check, 
   X, 
@@ -389,6 +392,30 @@ const PurchaseNotification = () => {
 // --- Main App ---
 
 export default function App() {
+  const [currentPath, setCurrentPath] = useState(
+    typeof window !== 'undefined' ? window.location.pathname : '/'
+  );
+
+  useEffect(() => {
+    const handleLocationChange = () => {
+      setCurrentPath(window.location.pathname);
+    };
+    window.addEventListener('popstate', handleLocationChange);
+    return () => window.removeEventListener('popstate', handleLocationChange);
+  }, []);
+
+  if (currentPath === '/upsell' || currentPath === '/upsell/') {
+    return <UpsellPage />;
+  }
+
+  if (currentPath === '/downsell' || currentPath === '/downsell/') {
+    return <DownsellPage />;
+  }
+
+  if (currentPath === '/thankyou' || currentPath === '/thankyou/') {
+    return <ThankYouPage />;
+  }
+
   const [isUpsellOpen, setIsUpsellOpen] = useState(false);
 
   return (
