@@ -395,24 +395,44 @@ export default function App() {
   const [currentPath, setCurrentPath] = useState(
     typeof window !== 'undefined' ? window.location.pathname : '/'
   );
+  const [currentHash, setCurrentHash] = useState(
+    typeof window !== 'undefined' ? window.location.hash : ''
+  );
 
   useEffect(() => {
     const handleLocationChange = () => {
       setCurrentPath(window.location.pathname);
+      setCurrentHash(window.location.hash);
     };
     window.addEventListener('popstate', handleLocationChange);
-    return () => window.removeEventListener('popstate', handleLocationChange);
+    window.addEventListener('hashchange', handleLocationChange);
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+      window.removeEventListener('hashchange', handleLocationChange);
+    };
   }, []);
 
-  if (currentPath === '/upsell' || currentPath === '/upsell/') {
+  const isRouteMatch = (route: string) => {
+    const cleanPath = currentPath.toLowerCase().replace(/\/$/, '');
+    const cleanHash = currentHash.toLowerCase();
+    
+    return (
+      cleanPath === route ||
+      cleanPath.endsWith(route) ||
+      cleanHash === `#${route}` ||
+      cleanHash === `#${route}/`
+    );
+  };
+
+  if (isRouteMatch('/upsell')) {
     return <UpsellPage />;
   }
 
-  if (currentPath === '/downsell' || currentPath === '/downsell/') {
+  if (isRouteMatch('/downsell')) {
     return <DownsellPage />;
   }
 
-  if (currentPath === '/thankyou' || currentPath === '/thankyou/') {
+  if (isRouteMatch('/thankyou')) {
     return <ThankYouPage />;
   }
 
