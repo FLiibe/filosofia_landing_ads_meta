@@ -15,6 +15,43 @@ export default function DownsellPage() {
       meta.content = "Aulas Prontas Essenciais com 40 sequências didáticas de Filosofia e Sociologia para o Ensino Médio.";
       document.head.appendChild(meta);
     }
+
+    // Load Hotmart Sales Funnel widget script
+    const scriptId = 'hotmart-checkout-elements-script';
+    let script = document.getElementById(scriptId) as HTMLScriptElement | null;
+
+    const initializeHotmart = () => {
+      if ((window as any).checkoutElements) {
+        try {
+          (window as any).checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel');
+        } catch (e) {
+          console.error('Error mounting Hotmart sales funnel:', e);
+        }
+      }
+    };
+
+    if (!script) {
+      script = document.createElement('script');
+      script.id = scriptId;
+      script.src = "https://checkout.hotmart.com/lib/hotmart-checkout-elements.js";
+      script.async = true;
+      script.onload = () => {
+        initializeHotmart();
+      };
+      document.body.appendChild(script);
+    } else {
+      if ((window as any).checkoutElements) {
+        initializeHotmart();
+      } else {
+        script.addEventListener('load', initializeHotmart);
+      }
+    }
+
+    return () => {
+      if (script) {
+        script.removeEventListener('load', initializeHotmart);
+      }
+    };
   }, []);
 
   return (
@@ -482,7 +519,7 @@ export default function DownsellPage() {
                 <h3>Defina o objetivo</h3>
                 <p>Entre em sala sabendo qual aprendizagem conduzir e observar.</p>
               </article>
-              <article class="step">
+              <article className="step">
                 <div className="step-number">02</div>
                 <h3>Prepare o tema</h3>
                 <p>Evite improvisos consultando antes os conceitos e materiais necessários.</p>
@@ -544,6 +581,10 @@ export default function DownsellPage() {
               <div className="final-price">R$ 24,90</div>
               <p className="native-note">Decida agora usando as opções exibidas pela Hotmart nesta página.</p>
             </div>
+            
+            {/* HOTMART - Sales Funnel Widget */}
+            {/* sales funnel container */}
+            <div id="hotmart-sales-funnel" className="mt-8 mx-auto max-w-2xl bg-white rounded-2xl p-4 shadow-sm border border-slate-100"></div>
           </div>
         </section>
       </main>
