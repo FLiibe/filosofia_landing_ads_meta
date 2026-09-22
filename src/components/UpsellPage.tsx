@@ -502,7 +502,7 @@ export default function UpsellPage() {
           <div className="container hero-grid">
             <div className="hero-copy">
               <p className="eyebrow">O próximo passo para parar de improvisar</p>
-              <h1>Você já tem as dinâmicas. Agora pare de perder horas montando cada aula <span className="accent">do zero.</span></h1>
+              <h1>Você já tem as atividades. Agora pare de perder horas montando cada aula <span className="accent">do zero.</span></h1>
               <p className="hero-lead">
                 Adicione agora uma biblioteca com <strong>100 sequências didáticas completas</strong> e transforme ideias soltas
                 em aulas organizadas, com começo, desenvolvimento e fechamento.
@@ -543,7 +543,7 @@ export default function UpsellPage() {
             <div className="section-heading">
               <p className="eyebrow">Chega de encarar uma página em branco</p>
               <h2>Não compre apenas atividades. Tenha a <span className="accent">aula inteira</span> organizada.</h2>
-              <p>Enquanto uma dinâmica entrega uma ideia, esta biblioteca mostra como transformar essa ideia em uma aula completa e aplicável.</p>
+              <p>Enquanto uma atividade entrega uma ideia, esta biblioteca mostra como transformar essa ideia em uma aula completa e aplicável.</p>
             </div>
 
             <div className="cards">

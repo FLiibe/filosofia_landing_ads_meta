@@ -270,13 +270,13 @@ const UpsellModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
             <div className="p-6 text-center">
               <h2 className="text-xl font-black text-slate-900 mb-3 uppercase tracking-tight">Espere! Antes de finalizar...</h2>
               <p className="text-gray-600 text-sm leading-relaxed mb-6">
-                Você escolheu o plano básico de <span className="font-bold text-slate-900">R$ 17,90</span>, mas apenas agora você pode garantir o <span className="font-bold text-sky-600">Pacote Completo</span> (com +400 dinâmicas e todos os bônus inclusos) por apenas <span className="font-bold text-slate-900">R$ 27,90</span>.
+                Você escolheu o plano básico de <span className="font-bold text-slate-900">R$ 9,90</span>, mas apenas agora você pode garantir o <span className="font-bold text-sky-600">Pacote Completo</span> (com +400 atividades e todos os bônus inclusos) por apenas <span className="font-bold text-slate-900">R$ 14,90</span>.
               </p>
               
               <div className="bg-gray-50 rounded-2xl p-5 mb-6 text-left space-y-2">
                 <div className="flex items-center gap-3 text-xs font-bold text-slate-800">
                   <Check className="w-4 h-4 text-[#22c55e]" />
-                  +400 DINÂMICAS DE FILOSOFIA E SOCIOLOGIA
+                  +400 ATIVIDADES DE FILOSOFIA E SOCIOLOGIA
                 </div>
                 <div className="flex items-center gap-3 text-xs font-bold text-slate-800">
                   <Check className="w-4 h-4 text-[#22c55e]" />
@@ -289,8 +289,8 @@ const UpsellModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
               </div>
               
               <div className="mb-6">
-                <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1 leading-tight">DE R$ 37,90 POR APENAS:</div>
-                <div className="text-4xl font-black text-slate-900">R$ 27,90</div>
+                <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1 leading-tight">DE R$ 19,90 POR APENAS:</div>
+                <div className="text-4xl font-black text-slate-900">R$ 14,90</div>
               </div>
               
               <div className="space-y-3">
@@ -298,13 +298,13 @@ const UpsellModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
                   href={'https://pay.hotmart.com/E105388531E?checkoutMode=10' + (typeof window !== 'undefined' ? window.location.search.replace('?', '&') : '')}
                   className="block w-full text-center bg-[#22c55e] hover:bg-[#16a34a] text-white font-black py-5 rounded-2xl text-xs uppercase tracking-widest shadow-xl shadow-green-500/20 transition-all active:scale-95 leading-tight"
                 >
-                  SIM! QUERO O PACOTE COMPLETO POR R$ 27,90
+                  SIM! QUERO O PACOTE COMPLETO POR R$ 14,90
                 </a>
                 <a 
                   href={'https://pay.hotmart.com/A105388396S?checkoutMode=10&bid=1778765015412' + (typeof window !== 'undefined' ? window.location.search.replace('?', '&') : '')}
                   className="block w-full text-center text-gray-400 hover:text-gray-600 font-bold py-2 text-[10px] uppercase tracking-widest transition-colors"
                 >
-                  NÃO, QUERO APENAS O PLANO BÁSICO POR R$ 17,90.
+                  NÃO, QUERO APENAS O PLANO BÁSICO POR R$ 9,90.
                 </a>
               </div>
             </div>
@@ -462,7 +462,7 @@ export default function App() {
             animate={{ opacity: 1, y: 0 }}
             className="text-3xl sm:text-5xl md:text-6xl font-black leading-[1.1] mb-8"
           >
-            +400 <span className="text-[#f0c040]">Dinâmicas</span> que Tornam <span className="text-[#f0c040]">Filosofia e Sociologia</span> <span className="text-sky-600">3x Mais Envolvente</span> Para Qualquer Jovem
+            Mais de 400 <span className="text-sky-600">Atividades Prontas</span> para Professores de <span className="text-[#f0c040]">Filosofia e Sociologia</span>
           </motion.h1>
 
           {/* Video Section */}
@@ -506,7 +506,7 @@ export default function App() {
             whileTap={{ scale: 0.95 }}
             className="inline-block bg-[#22c55e] hover:bg-[#16a34a] text-white font-black px-10 py-5 rounded-2xl text-lg uppercase tracking-widest shadow-2xl shadow-green-500/20 text-center transition-all cursor-pointer"
           >
-            Quero minhas dinâmicas prontas
+            Quero minhas atividades prontas
           </motion.a>
         </div>
       </section>
@@ -544,7 +544,7 @@ export default function App() {
           <div className="bg-green-50 border-l-8 border-green-500 rounded-r-xl p-8 text-green-900 shadow-sm">
             <p className="text-xl font-black mb-2">Respira.</p>
             <p className="text-lg leading-relaxed">
-              Com as <strong className="text-green-700">DINÂMICAS PRONTAS DE FILOSOFIA E SOCIOLOGIA</strong>, você vai conseguir que qualquer jovem pense, argumente e se interesse pela aula de Filosofia e Sociologia com profundidade e leveza.
+              Com as <strong className="text-green-700">ATIVIDADES PRONTAS DE FILOSOFIA E SOCIOLOGIA</strong>, você vai conseguir que qualquer jovem pense, argumente e se interesse pela aula de Filosofia e Sociologia com profundidade e leveza.
             </p>
           </div>
         </div>
@@ -560,7 +560,7 @@ export default function App() {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-16">
             <BonusCard index={0} imageUrl="/images/bonus_ethical_dilemmas_1789756311957.jpg" title="+100 Dilemas Éticos e Experimentos de Pensamento" value="R$ 97" />
             <BonusCard index={1} imageUrl="/images/bonus_debate_scripts_1789756322568.jpg" title="+60 Roteiros de Debate e Perguntas Provocadoras" value="R$ 47" />
-            <BonusCard index={2} imageUrl="/images/bonus_movies_series_1789756332670.jpg" title="+50 Dinâmicas de Filosofia e Sociologia com Filmes e Séries" value="R$ 67" />
+            <BonusCard index={2} imageUrl="/images/bonus_movies_series_1789756332670.jpg" title="+50 Atividades de Filosofia e Sociologia com Filmes e Séries" value="R$ 67" />
             <BonusCard index={3} imageUrl="/images/bonus_educational_games_1789756344289.jpg" title="+40 Jogos de Filosofia e Sociologia para a Sala de Aula" value="R$ 67" />
             <BonusCard index={4} imageUrl="/images/bonus_active_evaluation_1789756353859.jpg" title="Guia Prático de Avaliação Ativa (Grelhas e Rubricas)" value="R$ 47" />
             <BonusCard index={5} imageUrl="/images/bonus_icebreakers_1789756362281.jpg" title="Atividades 'Quebra-Gelo' de 5 Minutos (Warm-ups)" value="R$ 37" />
@@ -594,10 +594,10 @@ export default function App() {
               title="PACOTE BÁSICO"
               subtitle="Para quem quer testar o método"
               oldPrice="R$ 97,00"
-              price="17,90"
+              price="9,90"
               onClick={() => setIsUpsellOpen(true)}
               features={[
-                { text: "+200 Dinâmicas de Filosofia e Sociologia", icon: BookOpen },
+                { text: "+200 Atividades de Filosofia e Sociologia", icon: BookOpen },
                 { text: "Garantia de 7 dias", icon: ShieldCheck }
               ]}
             />
@@ -610,7 +610,7 @@ export default function App() {
               title="PACOTE COMPLETO"
               subtitle="Para transformar suas aulas o ano todo"
               oldPrice="R$ 397,00"
-              price="37,90"
+              price="19,90"
               href={'https://pay.hotmart.com/F105388251G?checkoutMode=10&bid=1778765474761' + (typeof window !== 'undefined' ? window.location.search.replace('?', '&') : '')}
               modules={[
                 "Filosofia (Ética, Política, Lógica, Estética...)",
@@ -622,10 +622,10 @@ export default function App() {
                 "Sociologia Contemporânea"
               ]}
               features={[
-                { text: "+400 Dinâmicas de Filosofia e Sociologia", icon: BookOpen },
+                { text: "+400 Atividades de Filosofia e Sociologia", icon: BookOpen },
                 { text: "+100 Dilemas Éticos e Experimentos de Pensamento (GRÁTIS)", icon: Brain },
                 { text: "+60 Roteiros de Debate e Perguntas Provocadoras (GRÁTIS)", icon: MessageSquare },
-                { text: "+50 Dinâmicas de Filosofia e Sociologia com Filmes e Séries (GRÁTIS)", icon: Film },
+                { text: "+50 Atividades de Filosofia e Sociologia com Filmes e Séries (GRÁTIS)", icon: Film },
                 { text: "+40 Jogos de Filosofia e Sociologia para a Sala de Aula (GRÁTIS)", icon: Gamepad2 },
                 { text: "Para Fundamental II e Ensino Médio", icon: GraduationCap },
                 { text: "Acesso digital imediato", icon: Zap },
@@ -685,7 +685,7 @@ export default function App() {
             <div className="text-center md:text-left">
               <h3 className="text-2xl font-black text-slate-900 mb-4">Paula Ribeiro Pinto</h3>
               <p className="text-lg text-gray-600 leading-relaxed mb-8">
-                Filósofa e Socióloga, especialista em ensino de Humanidades. Com mais de 15 anos em sala de aula, desenvolveu o método de Dinâmicas Ativas para ajudar professores a formar pensadores críticos, fugindo da teoria árida no quadro-negro.
+                Filósofa e Socióloga, especialista em ensino de Humanidades. Com mais de 15 anos in sala de aula, desenvolveu o método de Atividades Ativas para ajudar professores a formar pensadores críticos, fugindo da teoria árida no quadro-negro.
               </p>
               
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -741,7 +741,7 @@ export default function App() {
             />
             <FAQItem 
               question="Serve para temas complexos?" 
-              answer="Sim! As dinâmicas foram criadas justamente para tornar temas densos (Kant, Hegel, Sartre, Platão etc.) acessíveis e envolventes para jovens estudantes." 
+              answer="Sim! As atividades foram criadas justamente para tornar temas densos (Kant, Hegel, Sartre, Platão etc.) acessíveis e envolventes para jovens estudantes." 
             />
             <FAQItem 
               question="É digital ou físico?" 
@@ -749,15 +749,15 @@ export default function App() {
             />
             <FAQItem 
               question="Ajuda na preparação para o ENEM?" 
-              answer="Sim! As dinâmicas estimulam o pensamento crítico, a argumentação e a leitura de Humanidades habilidades exigidas nas questões de Ciências Humanas do ENEM." 
+              answer="Sim! As atividades estimulam o pensamento crítico, a argumentação e a leitura de Humanidades habilidades exigidas nas questões de Ciências Humanas do ENEM." 
             />
             <FAQItem 
-              question="As dinâmicas estão alinhadas à BNCC?" 
+              question="As atividades estão alinhadas à BNCC?" 
               answer="Sim. Todo o conteúdo foi estruturado em conformidade com as competências e habilidades da Base Nacional Comum Curricular (BNCC)." 
             />
             <FAQItem 
               question="Preciso de materiais especiais para aplicar?" 
-              answer="Não! A grande maioria das dinâmicas utiliza apenas papel, caneta e a criatividade dos alunos. Algumas sugerem acesso a vídeo, mas há sempre alternativas sem tecnologia." 
+              answer="Não! A grande maioria das atividades utiliza apenas papel, caneta e a criatividade dos alunos. Algumas sugerem acesso a vídeo, mas há sempre alternativas sem tecnologia." 
             />
           </div>
         </div>
@@ -767,10 +767,10 @@ export default function App() {
       <section className="py-24 px-6 bg-white text-slate-900 text-center border-y border-gray-100">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-3xl sm:text-4xl font-black mb-6 leading-tight">
-            Quero Minhas <span className="text-sky-600">Dinâmicas de Filosofia e Sociologia</span>
+            Quero Minhas <span className="text-sky-600">Atividades de Filosofia e Sociologia</span>
           </h2>
           <p className="text-lg text-gray-600 mb-10 leading-relaxed">
-            Clique abaixo e tenha acesso imediato às dinâmicas que estão transformando as aulas de Filosofia e Sociologia no Brasil.
+            Clique abaixo e tenha acesso imediato às atividades que estão transformando as aulas de Filosofia e Sociologia no Brasil.
           </p>
           <motion.a 
             href="#planos"
